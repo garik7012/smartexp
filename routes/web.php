@@ -25,5 +25,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin'], 'as' => 'a
     Route::get('/', 'Admin\SubscribersController@index')->name('all');
     Route::get('/subscribers/create', 'Admin\SubscribersController@create')->name('create');
     Route::post('/subscribers/create', 'Admin\SubscribersController@store');
+    Route::get('/subscribers/edit{id}', 'Admin\SubscribersController@edit')->name('edit');
+    Route::post('/subscribers/edit{id}', 'Admin\SubscribersController@update');
     Route::delete('/subscribers/delete/{id}', 'Admin\SubscribersController@delete')->name('delete');
 });

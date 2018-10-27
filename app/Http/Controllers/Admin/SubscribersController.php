@@ -40,6 +40,29 @@ class SubscribersController extends Controller
         return redirect()->route('admin.subscribers.all')->with('success', 'successfully created');
     }
 
+    public function edit($id, Subscriber $subscriber)
+    {
+        $subscriber = $subscriber->findOrFail($id);
+
+        return view('admin.subscribers.edit', compact('subscriber'));
+    }
+
+    public function update($id, Subscriber $subscriber, Request $request)
+    {
+        $subscriber = $subscriber->findOrFail($id);
+        $rules = ['name' => 'required|min:2|max:255|string'];
+        if ($request->email != $subscriber->email) {
+            $rules['email'] = 'required|email|unique:subscribers';
+        }
+        $request->validate($rules);
+        $subscriber->name = $request->name;
+        $subscriber->email = $request->email;
+        $subscriber->is_subscribe = +$request->is_subscribe;
+        $subscriber->save();
+
+        return back()->with('success', 'successfully updated');
+    }
+
     public function delete($id, Subscriber $subscriber)
     {
         $subscriber = $subscriber->findOrFail($id);
