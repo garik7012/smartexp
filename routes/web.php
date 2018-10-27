@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'SubscribersController@index')->name('index');
+Route::post('/subscribe', 'SubscribersController@subscribe')->name('subscribe');
 
 //Auth::routes();
 Route::get('admin/login', 'Auth\LoginController@showLoginForm')->name('login');
