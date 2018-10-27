@@ -19,11 +19,20 @@ class SubscribersController extends Controller
         return view('admin.subscribers.all', ['subscribers' => $subscriber->paginate(20)]);
     }
 
+    /**
+     * show creation form
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         return view('admin.subscribers.create');
     }
 
+    /**
+     * store subscriber
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
         $request->validate([
@@ -40,6 +49,12 @@ class SubscribersController extends Controller
         return redirect()->route('admin.subscribers.all')->with('success', 'successfully created');
     }
 
+    /**
+     * show edit form
+     * @param $id
+     * @param Subscriber $subscriber
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit($id, Subscriber $subscriber)
     {
         $subscriber = $subscriber->findOrFail($id);
@@ -47,6 +62,13 @@ class SubscribersController extends Controller
         return view('admin.subscribers.edit', compact('subscriber'));
     }
 
+    /**
+     * update subscriber
+     * @param $id
+     * @param Subscriber $subscriber
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update($id, Subscriber $subscriber, Request $request)
     {
         $subscriber = $subscriber->findOrFail($id);
@@ -63,6 +85,12 @@ class SubscribersController extends Controller
         return back()->with('success', 'successfully updated');
     }
 
+    /**
+     * delete subscriber
+     * @param $id
+     * @param Subscriber $subscriber
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function delete($id, Subscriber $subscriber)
     {
         $subscriber = $subscriber->findOrFail($id);

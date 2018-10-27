@@ -7,11 +7,20 @@ use App\Models\Subscriber;
 
 class SubscribersController extends Controller
 {
+    /**
+     * subscribe form
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         return view('index');
     }
 
+    /**
+     * create and subscribe
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function subscribe(Request $request)
     {
         $request->validate([
@@ -27,6 +36,12 @@ class SubscribersController extends Controller
         return view('subscriber.successful', compact('subscriber'));
     }
 
+    /**
+     * show subscriber's cabinet
+     * @param string $id
+     * @param string $key
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function management($id = '', $key = '')
     {
         $subscriber = Subscriber::where('url_key', $key)
@@ -36,6 +51,12 @@ class SubscribersController extends Controller
         return view('subscriber.cabinet', compact('subscriber'));
     }
 
+    /**
+     * change subscribe status
+     * @param $id
+     * @param $key
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function subscribeToggle($id, $key)
     {
         $subscriber = Subscriber::where('url_key', $key)->findOrFail($id);
