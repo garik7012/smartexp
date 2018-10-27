@@ -47,6 +47,8 @@ class SubscribersController extends Controller
         $subscriber = Subscriber::where('url_key', $key)
             ->where('created_at', '>', date('Y-m-d H:i:s', strtotime('-3 months')))
             ->findOrFail($id);
+        $subscriber->file_link = str_random();
+        $subscriber->save();
 
         return view('subscriber.cabinet', compact('subscriber'));
     }
@@ -64,5 +66,20 @@ class SubscribersController extends Controller
         $subscriber->save();
 
         return back()->with(['success' => true]);
+    }
+
+    /**
+     * get File
+     * @param $id
+     * @param $link
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function getFile($id, $link)
+    {
+        $subscriber = Subscriber::where('file_link', $link)->findOrFail($id);
+        $subscriber->file_link = '';
+        $subscriber->save();
+
+        return response()->download(storage_path('app/any.txt'));
     }
 }
