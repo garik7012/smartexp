@@ -49,6 +49,7 @@
                     </div>
                 </div>
                 <!-- /.box -->
+                <a href="{{route('admin.subscribers.create')}}" class="btn btn-success">Create a subscriber</a>
             </div>
         </div>
     </section>

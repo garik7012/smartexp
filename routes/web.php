@@ -21,4 +21,8 @@ Route::get('admin/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('admin/login', 'Auth\LoginController@login');
 Route::any('admin/logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::get('/admin', 'Admin\SubscribersController@index')->middleware(['auth', 'admin']);
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin'], 'as' => 'admin.subscribers.'], function () {
+    Route::get('/', 'Admin\SubscribersController@index')->name('all');
+    Route::get('/create', 'Admin\SubscribersController@create')->name('create');
+    Route::post('/create', 'Admin\SubscribersController@store');
+});

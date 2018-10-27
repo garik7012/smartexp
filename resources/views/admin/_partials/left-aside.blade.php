@@ -5,7 +5,7 @@
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu" data-widget="tree">
             <!-- Optionally, you can add icons to the links -->
-            <li class="{{str_is('dashboard', Route::currentRouteName()) ? 'active' : ''}}"><a href="/admin-side"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+            <li class="active"><a href="/admin"><i class="fa fa-users"></i> <span>Subscribers</span></a></li>
         </ul>
         <!-- /.sidebar-menu -->
     </section>
