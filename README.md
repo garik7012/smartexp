@@ -51,7 +51,7 @@ Migrated: 2014_10_12_100000_create_password_resets_table
 # php artisan db:seed
 ```
 
-#How to use
+# How to use
 
 ### Admin side:
     /admin
