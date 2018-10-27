@@ -17,7 +17,8 @@ class CreateSubscribersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('url_key')->unique();
+            $table->string('url_key');
+            $table->tinyInteger('is_subscribe')->nullable()->default(1);
             $table->timestamps();
         });
     }

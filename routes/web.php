@@ -13,6 +13,8 @@
 
 Route::get('/', 'SubscribersController@index')->name('index');
 Route::post('/subscribe', 'SubscribersController@subscribe')->name('subscribe');
+Route::get('/subscribe/{id?}/{key?}', 'SubscribersController@management')->name('subscriber-link');
+Route::get('/subscribe-toggle/{id?}/{key?}', 'SubscribersController@subscribeToggle')->name('subscribe-toggle');
 
 //Auth::routes();
 Route::get('admin/login', 'Auth\LoginController@showLoginForm')->name('login');

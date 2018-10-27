@@ -24,6 +24,22 @@ class SubscribersController extends Controller
         $subscriber->url_key = str_random();
         $subscriber->save();
 
-        return view('successful-subscribe', compact('subscriber'));
+        return view('subscriber.successful', compact('subscriber'));
+    }
+
+    public function management($id = '', $key = '')
+    {
+        $subscriber = Subscriber::where('url_key', $key)->findOrFail($id);
+
+        return view('subscriber.cabinet', compact('subscriber'));
+    }
+
+    public function subscribeToggle($id, $key)
+    {
+        $subscriber = Subscriber::where('url_key', $key)->findOrFail($id);
+        $subscriber->is_subscribe = !$subscriber->is_subscribe;
+        $subscriber->save();
+
+        return back()->with(['success' => true]);
     }
 }
