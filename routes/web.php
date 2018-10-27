@@ -23,6 +23,7 @@ Route::any('admin/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin'], 'as' => 'admin.subscribers.'], function () {
     Route::get('/', 'Admin\SubscribersController@index')->name('all');
-    Route::get('/create', 'Admin\SubscribersController@create')->name('create');
-    Route::post('/create', 'Admin\SubscribersController@store');
+    Route::get('/subscribers/create', 'Admin\SubscribersController@create')->name('create');
+    Route::post('/subscribers/create', 'Admin\SubscribersController@store');
+    Route::delete('/subscribers/delete/{id}', 'Admin\SubscribersController@delete')->name('delete');
 });

@@ -39,4 +39,12 @@ class SubscribersController extends Controller
 
         return redirect()->route('admin.subscribers.all')->with('success', 'successfully created');
     }
+
+    public function delete($id, Subscriber $subscriber)
+    {
+        $subscriber = $subscriber->findOrFail($id);
+        $subscriber->delete();
+
+        return back()->with(['success' => 'Subscriber was deleted']);
+    }
 }

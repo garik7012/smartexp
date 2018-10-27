@@ -37,7 +37,15 @@
                                     @else <span class="label label-danger">not subscribed</span> @endif
                                 </td>
                                 <td>{{$subscriber->created_at->format('d.m.Y')}}</td>
-                                <td></td>
+                                <td>
+                                    <a href="{{route('subscriber-link', [$subscriber->id, $subscriber->url_key])}}" class="btn btn-sm btn-info" target="_blank"><i class="fa fa-eye"></i></a>
+                                    <a href="{{route('subscriber-link', [$subscriber->id, $subscriber->url_key])}}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+                                    <form action="{{route('admin.subscribers.delete', $subscriber->id)}}" method="post" class="inline" onsubmit="return confirm('Are you sure?')">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-sm btn-danger" type="submit"><i class="fa fa-trash"></i></button>
+                                    </form>
+                                </td>
                             </tr>
                             @endforeach
                             </tbody>
