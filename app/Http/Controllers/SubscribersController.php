@@ -29,7 +29,9 @@ class SubscribersController extends Controller
 
     public function management($id = '', $key = '')
     {
-        $subscriber = Subscriber::where('url_key', $key)->findOrFail($id);
+        $subscriber = Subscriber::where('url_key', $key)
+            ->where('created_at', '>', date('Y-m-d H:i:s', strtotime('-3 months')))
+            ->findOrFail($id);
 
         return view('subscriber.cabinet', compact('subscriber'));
     }
